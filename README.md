@@ -1,4 +1,4 @@
-# TypesSript-LINQ test project with qunit.
+# TypeScript-LINQ test project with qunit.
  
  This is the test project for the "TypeScript-LINQ" project.
  The test suite is based on the 'qunit' test framwork. 
