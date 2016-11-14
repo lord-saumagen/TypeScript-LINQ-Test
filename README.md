@@ -1,6 +1,6 @@
 # TypeScript-LINQ test project with qunit.
  
- This is the test project for the "TypeScript-LINQ" project.
+ This is the test project for the "TypeScript-LINQ" module.
  The test suite is based on the 'qunit' test framwork. 
  
 ## Requirements 
