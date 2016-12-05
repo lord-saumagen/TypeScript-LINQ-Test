@@ -243,7 +243,7 @@ module TS_Collections_List_test
     assert.throws(() =>
     {
       new TS.Collections.List(false, testNumberArray).average();
-    }, TS.InvalidOperationException, "The call should fail with a \"TS.InvalidOperationException\" for an 'List<number>' which elements sum exceedes the number range.");
+    }, TS.InvalidOperationException, "The call should fail with a \"TS.InvalidOperationException\" for an 'List<number>' which elements sum exceeds the number range.");
 
     assert.throws(() => 
     {
@@ -315,7 +315,7 @@ module TS_Collections_List_test
     strList = new TS.Collections.List(false, strEnum);
     resultArray = new Array<string>();
     strList.copyTo(resultArray);
-    assert.equal(resultArray.length, strList.length, "Schould return an array with a matching size.");
+    assert.equal(resultArray.length, strList.length, "Should return an array with a matching size.");
     assert.deepEqual(resultArray, DATA.CreateStringArray(), "The array should match with the source array.");
     strList.copyTo(resultArray, 5);
     assert.deepEqual(resultArray, controlArray, "The array should match with the controlArray array after a second copy operation.");
@@ -356,8 +356,8 @@ module TS_Collections_List_test
     numList = new TS.Collections.List(false, numEnum);
     strList = new TS.Collections.List(false, strEnum);
 
-    assert.equal(numList.count(), 10, "Schould return a number which matches with the source array length.");
-    assert.equal(strList.count(), 10, "Schould return a number which matches with the source array length.");
+    assert.equal(numList.count(), 10, "Should return a number which matches with the source array length.");
+    assert.equal(strList.count(), 10, "Should return a number which matches with the source array length.");
     numList.add(99);
     assert.equal(numList.count(), 11, "Should return a number which reflects the new list length.");
     assert.equal(numList.removeAt(0).removeAt(0).count(), 9, "Should return a number which reflects the new list length.");
@@ -423,7 +423,7 @@ module TS_Collections_List_test
     numList = new TS.Collections.List<number>(false, numEnum);
     carList = new TS.Collections.List<DATA.ICar>(false, carEnum);
 
-    assert.deepEqual(carList.elementAt(3), DATA.CreateCarsArray()[3], "The element on the viewed position should matcj with the expected value.");
+    assert.deepEqual(carList.elementAt(3), DATA.CreateCarsArray()[3], "The element on the viewed position should match with the expected value.");
     assert.equal(numList.elementAt(9), 10, "The element on the viewed position should match with the expected value.");
 
     assert.throws(() =>
@@ -456,7 +456,7 @@ module TS_Collections_List_test
     numList = new TS.Collections.List<number>(false, numEnum);
     carList = new TS.Collections.List<DATA.ICar>(false, carEnum);
 
-    assert.deepEqual(carList.elementAtOrDefault(3, DATA.Car), DATA.CreateCarsArray()[3], "The element on the viewed position should matct with the expected value.");
+    assert.deepEqual(carList.elementAtOrDefault(3, DATA.Car), DATA.CreateCarsArray()[3], "The element on the viewed position should match with the expected value.");
     assert.equal(numList.elementAtOrDefault(9, 0), 10, "The element on the viewed position should match with the expected value.");
     assert.deepEqual(carList.elementAtOrDefault(15, DATA.Car), new DATA.Car(), "The default element should be returned.");
     assert.equal(numList.elementAtOrDefault(99, 11), 11, "The default element should be returned.");
@@ -487,7 +487,7 @@ module TS_Collections_List_test
 
     assert.deepEqual(strList.except(lowCharEnum).toArray(), ["A", "B", "C", "D", "E", "F", "G"], "Should return a collection with the expected elements.");
     assert.deepEqual(strList.except(["x", "2", "?"]).toArray(), ["a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G"], "Should return an unchanged collection with 'secondEnumerator' which has no match.");
-    assert.deepEqual(strList.except(strList).toArray(), [], "Should return an empty collection whenn called with an identic collection.");
+    assert.deepEqual(strList.except(strList).toArray(), [], "Should return an empty collection when called with an identical collection.");
 
     //assert.throws(() =>
     //{
@@ -551,8 +551,8 @@ module TS_Collections_List_test
 
     assert.deepEqual(strList.firstOrDefault("x", item => item == "g"), "g", "Should return the first matching element in the sequence.");
     assert.deepEqual(carList.firstOrDefault(DATA.Car, item => item.name == "FIAT"), { name: "FIAT", horsePower: 80, disel: true, buildYear: Date.parse("1980-12-01"), price: 1000 }, "Should return the first matching element in the sequence.");
-    assert.deepEqual(strList.firstOrDefault("x", item => item == "?"), "x", "Should return the default element for a predicate which hans't a match.");
-    assert.deepEqual(carList.firstOrDefault(DATA.Car, item => item.name == "WHAT"), new DATA.Car(), "Should return the default element for a predicate which hans't a match.");
+    assert.deepEqual(strList.firstOrDefault("x", item => item == "?"), "x", "Should return the default element for a predicate which hasn't a match.");
+    assert.deepEqual(carList.firstOrDefault(DATA.Car, item => item.name == "WHAT"), new DATA.Car(), "Should return the default element for a predicate which hasn't a match.");
 
     assert.deepEqual(strList.clear().firstOrDefault("z"), "z", "Should return the default element for an empty sequence.");
     assert.deepEqual(carList.clear().firstOrDefault(DATA.Car, item => item.name == "FIAT"), new DATA.Car, "Should return the default element for an empty sequence.");
@@ -779,7 +779,7 @@ module TS_Collections_List_test
     assert.throws(() => 
     {
       numList.insert(-1, 11);
-    }, TS.InvalidTypeException, "The call should fail with a \"TS.InvalidTypeException\" for a nagative 'index' argument.");
+    }, TS.InvalidTypeException, "The call should fail with a \"TS.InvalidTypeException\" for a negative 'index' argument.");
 
     assert.throws(() => 
     {
@@ -921,7 +921,7 @@ module TS_Collections_List_test
     assert.equal(numList.length, 7, "Should return the expected length");
     numList.add(8);
     assert.equal(numList.length, 8, "Should return the expected length");
-    numList.remove(0).remove(0);
+    numList.remove(null).remove(4);
     assert.equal(numList.length, 6, "Should return the expected length");
     numList.clear();
     assert.equal(numList.length, 0, "Should return the expected length");
@@ -1057,7 +1057,7 @@ module TS_Collections_List_test
     assert.throws(() =>
     {
       new TS.Collections.List(false, TS.Linq.Enumerator.Empty).orderBy(null);
-    }, TS.ArgumentNullOrUndefinedException, "The call should fail with a \"TS.ArgumentNullOrUndefinedException\" for a null 'selctor' argument.");
+    }, TS.ArgumentNullOrUndefinedException, "The call should fail with a \"TS.ArgumentNullOrUndefinedException\" for a null 'selector' argument.");
 
     assert.throws(() =>
     {
@@ -1143,7 +1143,7 @@ module TS_Collections_List_test
     assert.throws(() =>
     {
       new TS.Collections.List(false, TS.Linq.Enumerator.Empty).orderByDescending(null);
-    }, TS.ArgumentNullOrUndefinedException, "The call should fail with a \"TS.ArgumentNullOrUndefinedException\" for a null 'selctor' argument.");
+    }, TS.ArgumentNullOrUndefinedException, "The call should fail with a \"TS.ArgumentNullOrUndefinedException\" for a null 'selector' argument.");
 
     assert.throws(() =>
     {
@@ -1176,6 +1176,44 @@ module TS_Collections_List_test
     {
       new TS.Collections.List(false, TS.Linq.Enumerator.Empty).random().first();
     }, TS.Linq.EmptyEnumeratorException, "The call should fail with a \"TS.Linq.EmptyEnumeratorExceptionn\" for an empty list.");
+
+  });
+
+
+  QUnit.test("remove", (assert) => 
+  {
+    let testArray: Array<any> = [null, "one", 2.5, Math.PI, {}, ["black", "blue"], 0, Number.MAX_SAFE_INTEGER, null];
+    let testList = new TS.Collections.List<any>(true, testArray);
+
+    assert.equal(testList.length, testArray.length, "The list should have the same length as the source array.");
+
+    testList.remove(null);
+
+    assert.equal(testList.length, testArray.length - 1, "The list should have one less element than the source array.");
+    testArray.shift();
+    assert.deepEqual(testList.toArray(), testArray, "The list should match with the test array.");
+
+    testList.remove(0);
+    assert.equal(testList.length, testArray.length - 1, "The list should have one less element than the source array.");
+    testArray.splice(testArray.indexOf(0), 1);
+    assert.deepEqual(testList.toArray(), testArray, "The list should match with the test array.");
+  });
+
+
+  QUnit.test("removeAt", (assert) =>
+  {
+    let testArray: Array<any> = [null, "one", 2.5, Math.PI, {}, ["black", "blue"], 0, Number.MAX_SAFE_INTEGER, null];
+    let testList = new TS.Collections.List<any>(true, testArray);
+
+    testList.removeAt(0);
+    assert.equal(testList.length, testArray.length - 1, "The list should have one less element than the source array.");
+    testArray.shift();
+    assert.deepEqual(testList.toArray(), testArray, "The list should match with the test array.");
+
+    testList.removeAt(2);
+    assert.equal(testList.length, testArray.length - 1, "The list should have one less element than the source array.");
+    testArray.splice(testArray.indexOf(Math.PI), 1);
+    assert.deepEqual(testList.toArray(), testArray, "The list should match with the test array.");
 
   });
 
@@ -1242,6 +1280,7 @@ module TS_Collections_List_test
 
   QUnit.test("selectMany", (assert) =>
   {
+
     let result = new TS.Collections.List(false, custEnum).selectMany(customer =>
     {
       return new TS.Collections.List(false, ordEnum).where(order => order.CustomerID == customer.CustomerID);
@@ -1297,7 +1336,7 @@ module TS_Collections_List_test
 
     assert.equal(result.count(), DATA.CreateNumberArray().length, "Should return a result enumerator with the same length as the source array.");
     assert.notDeepEqual(result.toArray(), DATA.CreateNumberArray(), "Should return a shuffled enumerator which doesn't be equal to the source enumerator");
-    assert.deepEqual(new TS.Collections.List(false, TS.Linq.Enumerator.Empty).shuffle().toArray(), [], "A shuffeled empty enumerator should still be an empty enumerator.");
+    assert.deepEqual(new TS.Collections.List(false, TS.Linq.Enumerator.Empty).shuffle().toArray(), [], "A shuffled empty enumerator should still be an empty enumerator.");
   });
 
 
@@ -1367,7 +1406,7 @@ module TS_Collections_List_test
     assert.throws(() =>
     {
       new TS.Collections.List(false, [1, 2, 1, 2]).singleOrDefault(1);
-    }, TS.Linq.MoreThanOneElementException, "The call should fail with a \"TS.Linq.MoreThanOneElementException\" for an list which has more thatn one element."); 
+    }, TS.Linq.MoreThanOneElementException, "The call should fail with a \"TS.Linq.MoreThanOneElementException\" for an list which has more than one element."); 
 
     assert.throws(() =>
     {
@@ -1535,10 +1574,10 @@ module TS_Collections_List_test
     assert.equal(resultCarArr1.length, 10, "Should return all elements of both test arrays when called without an equality comparer.");
 
     let resultCarArr2 = new TS.Collections.List(false, carEnum).union(DATA.CreateCarsUnionTestArray(), (first, second) => first.name == second.name).toArray();
-    assert.equal(resultCarArr2.length, 8, "Should return only those elements of both test arrays which are uniqe when called with an equality comparer.");
+    assert.equal(resultCarArr2.length, 8, "Should return only those elements of both test arrays which are unique when called with an equality comparer.");
 
     let emptyList = new TS.Collections.List(false, TS.Linq.Enumerator.Empty).union(TS.Linq.Enumerator.Empty).toList();
-    assert.equal(emptyList.count(), 0, "Should return an empty enumerator when calle with empty enumerators.");
+    assert.equal(emptyList.count(), 0, "Should return an empty enumerator when called with empty enumerators.");
 
     assert.throws(() =>
     {

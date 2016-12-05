@@ -237,7 +237,7 @@ module TS_Collections_Dictionary_test
     copyArray.copyTo(copyWithItemArray);
     assert.deepEqual(copyWithItemArray, openWithItemArray, "Should copy the whole dictionary to an array which should be equal to the source array.");
     copyArray.copyTo(copyWithItemArray, copyWithItemArray.length);
-    assert.equal(copyWithItemArray.length, openWithItemArray.length * 2, "Should copy the whole dictionary to the target array beinning at the specified index.");
+    assert.equal(copyWithItemArray.length, openWithItemArray.length * 2, "Should copy the whole dictionary to the target array beginning at the specified index.");
 
     assert.throws(() => 
     {
@@ -320,7 +320,7 @@ module TS_Collections_Dictionary_test
     item = new TS.Collections.KeyValuePair<string, TS.Collections.List<TS.Collections.KeyValuePair<string, string>>>("GROSR", val);
     custDictLength = custDict.count();
     custDict.remove(item, (first, second) => first.single(pair => pair.key == "CompanyName").value == second.single(pair => pair.key == "CompanyName").value);
-    assert.equal(custDict.count(), custDictLength - 1, "Should remove theitem from the dictionary with a matching king and a value wich compares to the value of the item argument using the provided equality comparer.");
+    assert.equal(custDict.count(), custDictLength - 1, "Should remove the item from the dictionary with a matching king and a value which compares to the value of the item argument using the provided equality comparer.");
     custDict.clear();
     custDict.remove(item, (first, second) => first.single(pair => pair.key == "CompanyName").value == second.single(pair => pair.key == "CompanyName").value);
 

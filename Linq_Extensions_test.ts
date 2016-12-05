@@ -188,7 +188,7 @@ module TS_Linq_Extensions_test
     assert.throws(() =>
     {
       TS.Linq.Extensions.average(new TS.Linq.Enumerator<number>(testNumberArray));
-    }, TS.OverflowException, "The call should fail with a \"TS.OverflowException\" for an 'Enumerator<number>' which elements sum exceedes the number range.");
+    }, TS.OverflowException, "The call should fail with a \"TS.OverflowException\" for an 'Enumerator<number>' which elements sum exceeds the number range.");
   });
 
 
@@ -869,13 +869,13 @@ module TS_Linq_Extensions_test
 
     carsIntersect = TS.Linq.Extensions.intersect(carsEnum, carsUnionEnum, (first, second) => first.name === second.name);
 
-    assert.equal(TS.Linq.Extensions.count(carsIntersect), 2, "Schould return a result set with 2 elements when called with an equality comparer.");
+    assert.equal(TS.Linq.Extensions.count(carsIntersect), 2, "Should return a result set with 2 elements when called with an equality comparer.");
 
     numberEnumFirst = new TS.Linq.Enumerator<number>(DATA.CreateNumberArray());
     numberEnumSecond = new TS.Linq.Enumerator<number>([2, 4, 7, 8]);
     numberIntersect = TS.Linq.Extensions.intersect(numberEnumFirst, numberEnumSecond);
 
-    assert.equal(TS.Linq.Extensions.count(numberIntersect), 4, "Schould return a result set with 4 elements when called without an equality comparer.");
+    assert.equal(TS.Linq.Extensions.count(numberIntersect), 4, "Should return a result set with 4 elements when called without an equality comparer.");
 
     assert.throws(() =>
     {
@@ -987,7 +987,7 @@ module TS_Linq_Extensions_test
     assert.equal(result.ContactName, "Zbyszek Piestrzeniewicz", "Should return the last element in the enumerable.");
 
     result = TS.Linq.Extensions.lastOrDefault(TS.Linq.Enumerator.Empty, DATA.Customer);
-    assert.deepEqual(result, new DATA.Customer(), "Should return a default object if the enumerable is empyt.");
+    assert.deepEqual(result, new DATA.Customer(), "Should return a default object if the enumerable is empty.");
 
     result = TS.Linq.Extensions.lastOrDefault(custEnum, DATA.Customer, (Item) => Item.Country == "USA");
     assert.equal(result.CompanyName, "White Clover Markets", "Should return the last match in the result set when called with a predicate.");
@@ -1163,7 +1163,7 @@ module TS_Linq_Extensions_test
     assert.throws(() =>
     {
       TS.Linq.Extensions.orderBy(TS.Linq.Enumerator.Empty, null);
-    }, TS.ArgumentNullOrUndefinedException, "The call should fail with a \"TS.ArgumentNullOrUndefinedException\" for a null 'selctor' argument.");
+    }, TS.ArgumentNullOrUndefinedException, "The call should fail with a \"TS.ArgumentNullOrUndefinedException\" for a null 'selector' argument.");
 
     assert.throws(() =>
     {
@@ -1316,7 +1316,7 @@ module TS_Linq_Extensions_test
     assert.throws(() =>
     {
       TS.Linq.Extensions.range(Number.MAX_SAFE_INTEGER - 2, 5);
-    }, TS.ArgumentOutOfRangeException, "The call should fail with a \"TS.ArgumentOutOfRangeException\" for a 'start, count' combination which exceedes the allowed range.");
+    }, TS.ArgumentOutOfRangeException, "The call should fail with a \"TS.ArgumentOutOfRangeException\" for a 'start, count' combination which exceeds the allowed range.");
 
     assert.throws(() =>
     {
@@ -1534,7 +1534,7 @@ module TS_Linq_Extensions_test
     custArray[12] = new DATA.Customer("", "", "", "No contact name");
     custEnumEx = new TS.Linq.Enumerator<DATA.ICustomer>(custArray);
     compareResult = TS.Linq.Extensions.sequenceEqual(custEnum, custEnumEx, (first, second) => first.ContactName == second.ContactName);
-    assert.ok(!compareResult, "Should return false when comparing two enumerators with different elements usin an equalityComparer");
+    assert.ok(!compareResult, "Should return false when comparing two enumerators with different elements using an equalityComparer");
 
     numArray = DATA.CreateNumberArray();
     numArray.push(99);
@@ -1582,7 +1582,7 @@ module TS_Linq_Extensions_test
 
     assert.equal(TS.Linq.Extensions.count(numEnum), DATA.CreateNumberArray().length, "Should return a result enumerator with the same length as the source array.");
     assert.notDeepEqual(TS.Linq.Extensions.toArray(numEnum), DATA.CreateNumberArray(), "Should return a shuffled enumerator which doesn't be equal to the source enumerator");
-    assert.deepEqual(TS.Linq.Extensions.shuffle(TS.Linq.Enumerator.Empty).toArray(), [], "A shuffeled empty enumerator should still be an empty enumerator.");
+    assert.deepEqual(TS.Linq.Extensions.shuffle(TS.Linq.Enumerator.Empty).toArray(), [], "A shuffled empty enumerator should still be an empty enumerator.");
 
     assert.throws(() =>
     {
@@ -1649,10 +1649,10 @@ module TS_Linq_Extensions_test
     assert.equal(result.CustomerID, "OTTIK", "Should return the expected single result.");
 
     result = TS.Linq.Extensions.singleOrDefault(TS.Linq.Enumerator.Empty, DATA.Customer);
-    assert.deepEqual(result, new DATA.Customer(), "Shoud return a default object for an 'enumerator' which is empty.");
+    assert.deepEqual(result, new DATA.Customer(), "Should return a default object for an 'enumerator' which is empty.");
 
     result = TS.Linq.Extensions.singleOrDefault(custEnum, DATA.Customer, CUST => CUST.CustomerID == "NOP");
-    assert.deepEqual(result, new DATA.Customer(), "Shoud return a default object for a 'predicate' which has no match with the enumerator.");
+    assert.deepEqual(result, new DATA.Customer(), "Should return a default object for a 'predicate' which has no match with the enumerator.");
 
     assert.throws(() =>
     {
@@ -1816,13 +1816,13 @@ module TS_Linq_Extensions_test
 
 
     numEnum = TS.Linq.Extensions.takeWhile([1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1], item => item < 5);
-    assert.deepEqual(TS.Linq.Extensions.toArray(numEnum), [1, 2, 3, 4], "Should only return alements util the first mismatch.");
+    assert.deepEqual(TS.Linq.Extensions.toArray(numEnum), [1, 2, 3, 4], "Should only return elements until the first mismatch.");
 
     numEnum = TS.Linq.Extensions.takeWhile(DATA.CreateNumberArray(), item => item < -1);
     assert.deepEqual(TS.Linq.Extensions.count(numEnum), 0, "Should return an empty result enumerator for a predicate which has no match.");
 
     numEnum = TS.Linq.Extensions.takeWhile(TS.Linq.Enumerator.Empty, item => true);
-    assert.deepEqual(TS.Linq.Extensions.count(numEnum), 0, "Should return an empty result enumerator when used against an empt source enumerator.");
+    assert.deepEqual(TS.Linq.Extensions.count(numEnum), 0, "Should return an empty result enumerator when used against an empty source enumerator.");
 
     assert.throws(() =>
     {
@@ -1852,8 +1852,8 @@ module TS_Linq_Extensions_test
 
     numArr = TS.Linq.Extensions.toArray(numEnum);
 
-    assert.equal(numArr.length, numEnum.count(), "Should return a result array which matches with the source enumeator.");
-    assert.equal(TS.Linq.Extensions.toArray(TS.Linq.Enumerator.Empty).length, 0, "Should return an empty array for an empty enumeator.");
+    assert.equal(numArr.length, numEnum.count(), "Should return a result array which matches with the source enumerator.");
+    assert.equal(TS.Linq.Extensions.toArray(TS.Linq.Enumerator.Empty).length, 0, "Should return an empty array for an empty enumerator.");
 
     assert.throws(() =>
     {
@@ -1906,7 +1906,7 @@ module TS_Linq_Extensions_test
     numList = TS.Linq.Extensions.toList(numEnum);
 
     assert.equal(numList.count(), numEnum.count(), "Should return a list which has the same length as the original enumerable.");
-    assert.equal(TS.Linq.Extensions.toList(TS.Linq.Enumerator.Empty).count(), 0, "Should return an empty list for an empty enumeator.");
+    assert.equal(TS.Linq.Extensions.toList(TS.Linq.Enumerator.Empty).count(), 0, "Should return an empty list for an empty enumerator.");
 
     assert.throws(() => 
     {
@@ -1949,10 +1949,10 @@ module TS_Linq_Extensions_test
 
     carsEnumResult = TS.Linq.Extensions.union(DATA.CreateCarsArray(), DATA.CreateCarsUnionTestArray(), (first, second) => first.name == second.name);
     carsArrayResult = TS.Linq.Extensions.toArray(carsEnumResult);
-    assert.equal(carsArrayResult.length, 8, "Should return only those elements of both test arrays which are uniqe when called with an equality comparer.");
+    assert.equal(carsArrayResult.length, 8, "Should return only those elements of both test arrays which are unique when called with an equality comparer.");
 
     emptyEnum = TS.Linq.Extensions.union(TS.Linq.Enumerator.Empty, TS.Linq.Enumerator.Empty);
-    assert.equal(TS.Linq.Extensions.count(emptyEnum), 0, "Should return an empty enumerator when calle with empty enumerators.");
+    assert.equal(TS.Linq.Extensions.count(emptyEnum), 0, "Should return an empty enumerator when called with empty enumerators.");
 
     carsEnum = new TS.Linq.Enumerator<DATA.ICar>(DATA.CreateCarsArray());
     assert.throws(() =>
